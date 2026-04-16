@@ -6,7 +6,7 @@ import sandbox
 import pandas as pd
 import test_agent as test
  
-MAX_MUTATIONS = 5
+MAX_MUTATIONS = 10
 MODEL_NAME = "gpt-4o"
 META_PROMPT = open(os.path.join(os.path.dirname(__file__), "metaprompt.txt"), "r").read()
 load_dotenv() 
