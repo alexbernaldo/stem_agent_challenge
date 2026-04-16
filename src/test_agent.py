@@ -1,7 +1,7 @@
 import json
 import pandas as pd
 
-def testing(agent_state, dataset_path):
+def testing(agent_state, dataset_path, eda_report):
     
     dataset = pd.read_csv(dataset_path)
 
@@ -12,7 +12,7 @@ def testing(agent_state, dataset_path):
     
     try:
         exec(python_code, namespace)
-        test_cleaned_data = namespace["clean_dataframe"](dataset)
+        test_cleaned_data = namespace["clean_dataframe"](dataset, eda_report)
         
         print("Dirty Dataset:\n")
         print("Null Values:")
@@ -28,6 +28,10 @@ def testing(agent_state, dataset_path):
         if test_cleaned_data.shape[0] == 0:
             return False, "The cleaned dataset is empty."
         else:
-            return True, "Test passed successfully."
+            if test_cleaned_data.shape[0]/dataset.shape[0] < 0.8:
+                return False, "The cleaned dataset retains less than 80% of the original data, which may indicate excessive cleaning."
+            else:
+                return True, "Test passed successfully."
+
     except Exception as e:
         return False, f"Test failed with error: {str(e)}"

@@ -1,11 +1,13 @@
 import subprocess
 import tempfile
+import json
 
-def run_safeguard(code, dataset_path):
+def run_safeguard(code, dataset_path, eda_report):
     
     DATASET_PATH = f'DATASET_PATH = "{dataset_path}"\n'
+    EDA_REPORT = f'eda_report = {json.dumps(eda_report)}\n'
     
-    full_code = DATASET_PATH + code
+    full_code = DATASET_PATH + EDA_REPORT + code
     
     try:
         code_file = tempfile.NamedTemporaryFile(delete=False, suffix=".py", mode="w").name
