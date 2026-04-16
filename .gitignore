@@ -2,3 +2,4 @@
 __pycache__/
 *.py[cod]
 agent_state_*.json
+.DS_Store
