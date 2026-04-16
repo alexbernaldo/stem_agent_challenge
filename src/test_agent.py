@@ -25,6 +25,9 @@ def testing(agent_state, dataset_path):
         print("\n Outliers in cleaned dataset:")
         print(test_cleaned_data.shape)
         
-        return True, "Test passed successfully."
+        if test_cleaned_data.shape[0] == 0:
+            return False, "The cleaned dataset is empty."
+        else:
+            return True, "Test passed successfully."
     except Exception as e:
         return False, f"Test failed with error: {str(e)}"
